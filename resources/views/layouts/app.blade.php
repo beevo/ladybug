@@ -36,7 +36,9 @@
 				@include('layouts._menu_links')
 			</ul>
 			<div class="container">
-				@yield('content')
+				<div class="row">
+					@yield('content')
+				</div>
 			</div>
 			@include('layouts._footer')
 		</div>
