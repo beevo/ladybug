@@ -5,6 +5,7 @@ use Illuminate\Database\Eloquent\Model;
 use Wildside\Userstamps\Userstamps;
 
 class Comment extends Model{
+  use Userstamps;
   // ->created_by from userstamps
   public function bug(){
     $this->belongsTo('App\Models\Bug');
