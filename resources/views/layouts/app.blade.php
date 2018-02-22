@@ -10,10 +10,10 @@
 		<title>{{ config('app.name') }}</title>
 		<!-- Styles -->
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-alpha.4/css/materialize.min.css">
-		<link href="{{ asset('css/app.css') }}" rel="stylesheet">
+		<link href="{{ asset('css/app.css') }}?time={{ time() }}" rel="stylesheet">
 	</head>
 	<body>
-		<div id="app">
+		<div>
 			<nav>
 				<div class="nav-wrapper">
 					<div class="container">
@@ -36,7 +36,7 @@
 				@include('layouts._menu_links')
 			</ul>
 			<div class="container">
-				<div class="row">
+				<div class="row" id="app">
 					@yield('content')
 				</div>
 			</div>

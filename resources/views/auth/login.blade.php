@@ -2,7 +2,7 @@
 
 @section('content')
 <form class="col s12" method="POST" action="{{ route('login') }}">
-  <div class="card col s12 m6">
+  <div class="card col s12">
     <div class="card-content">
       <span class="card-title">Login</span>
         @csrf
@@ -16,6 +16,7 @@
             <input id="email" type="email" name="email" value="{{ old('email') }}"
             required autofocus
             class="validate {{ $errors->has('email') ? ' is-invalid' : '' }}" >
+            <label for="email">Email</label>
           </div>
           <div class="col s12 input-field">
             @if ($errors->has('password'))
@@ -25,6 +26,7 @@
             @endif
             <input id="password" type="password" name="password" required
             class="validate {{ $errors->has('password') ? ' is-invalid' : '' }}">
+            <label for="password">Password</label>
           </div>
         </div>
         <div class="row">
