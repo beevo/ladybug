@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateBugsTable extends Migration
+class CreateComments extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateBugsTable extends Migration
      */
     public function up()
     {
-        Schema::create('bugs', function (Blueprint $table) {
+        Schema::create('comments', function (Blueprint $table) {
             $table->increments('id');
-            $table->text('description')->nullable();
-            $table->text('title');
-            $table->enum('status',['open','closed']);
+            $table->text('content');
+            $table->integer('bug_id');
             $table->timestamps();
             $table->softDeletes();
             $table->integer('created_by')->nullable()->default(null);
@@ -33,6 +32,6 @@ class CreateBugsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bugs');
+        Schema::dropIfExists('comments');
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateBugsTable extends Migration
+class CreateBugUser extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,13 @@ class CreateBugsTable extends Migration
      */
     public function up()
     {
-        Schema::create('bugs', function (Blueprint $table) {
+        Schema::create('bug_user', function (Blueprint $table) {
             $table->increments('id');
-            $table->text('description')->nullable();
-            $table->text('title');
-            $table->enum('status',['open','closed']);
+            $table->integer('bug_id');
+            $table->integer('user_id');
             $table->timestamps();
             $table->softDeletes();
-            $table->integer('created_by')->nullable()->default(null);
+            $table->integer('assigned_by')->nullable()->default(null);
             $table->integer('updated_by')->nullable()->default(null);
             $table->integer('deleted_by')->nullable()->default(null);
         });
@@ -33,6 +32,6 @@ class CreateBugsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bugs');
+        Schema::dropIfExists('bug_user');
     }
 }

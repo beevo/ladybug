@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateBugsTable extends Migration
+class CreateTags extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateBugsTable extends Migration
      */
     public function up()
     {
-        Schema::create('bugs', function (Blueprint $table) {
+        Schema::create('tags', function (Blueprint $table) {
             $table->increments('id');
-            $table->text('description')->nullable();
-            $table->text('title');
-            $table->enum('status',['open','closed']);
+            $table->string('name');
+            $table->string('color')->default('#F0F2F1')->nullable();
             $table->timestamps();
             $table->softDeletes();
             $table->integer('created_by')->nullable()->default(null);
@@ -33,6 +32,6 @@ class CreateBugsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bugs');
+        Schema::dropIfExists('tags');
     }
 }
