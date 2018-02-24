@@ -4,8 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Bug;
+use App\Models\User;
 class BugController extends Controller {
-
+	public function __construct(){
+		$this->middleware('auth',['only' =>
+		'store',
+		'update'
+	]);
+	}
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -13,7 +19,7 @@ class BugController extends Controller {
 	 */
 	public function index() {
 		//
-    return 'index';
+    return Bug::all();
 	}
 
 	/**
@@ -35,7 +41,9 @@ class BugController extends Controller {
 	 */
 	public function create() {
 		//
-    return 'create';
+    return view('bugs/create',[
+			'users' => User::all()
+		]);
 	}
 
 	/**
@@ -45,8 +53,14 @@ class BugController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function store(Request $request) {
-		//
-    return 'store';
+		// return $request->all();
+		$request->validate([
+	    'title' => 'required|max:1000',
+	    'description' => 'max:5000'
+		]);
+		$bug = new Bug();
+		$bug->fill($request->all());
+    return $bug;
 	}
 
 

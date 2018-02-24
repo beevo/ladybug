@@ -4,10 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Wildside\Userstamps\Userstamps;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Bug extends Model{
   use Userstamps;
-
+  use SoftDeletes;
+  
   protected $fillable = [
     'title', 'description'
   ];
