@@ -36,6 +36,8 @@ $(document).ready(function(){
       $(this).parent().remove();
       event.stopPropagation();
     }
-
+  });
+  $('.focus-textarea').on('click',function(){
+    $(this).find('textarea').focus();
   });
 });

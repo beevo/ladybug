@@ -31,7 +31,9 @@ class BugController extends Controller {
 	public function show($id) {
 		//
 		$bug = Bug::findOrFail($id);
-    return $bug->creator;
+		return view('bugs/show',[
+			'bug' => $bug
+		]);
 	}
 
 	/**
@@ -60,7 +62,11 @@ class BugController extends Controller {
 		]);
 		$bug = new Bug();
 		$bug->fill($request->all());
-    return $bug;
+		if ($bug->save()) {
+			return redirect()->action('BugController@show',['id' => $bug->id]);
+		}else{
+			abort(403,'Could not save new bug.');
+		}
 	}
 
 

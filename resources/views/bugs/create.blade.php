@@ -61,9 +61,7 @@
       </option> --}}
       @auth
         @foreach ($users as $user)
-          <option value="{{ $user->id }}" {{ $user->id == Auth::user()->id ? "selected" : "" }}>
-            {{ $user->email }}
-          </option>
+          <option value="{{ $user->id }}" {{ $user->id == Auth::user()->id ? "selected" : "" }}>{{ $user->email }}</option>
         @endforeach
       @endauth
       @guest
