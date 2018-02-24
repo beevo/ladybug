@@ -1,10 +1,12 @@
-<form method="POST" action="/bugs">
+<form method="POST" action="{{ $bug->id ? '/bugs/'.$bug->id : '/bugs'}}">
   @method($method)
   @csrf
   <div class="card col s12 l8 row">
     <div class="card-content">
       <div class="card-title">
-        Add New Bug
+        @if ($method == "POST")
+          Add New Bug
+        @endif
       </div>
       <div class="row">
         <div class="input-field col s12">

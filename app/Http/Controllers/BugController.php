@@ -97,8 +97,13 @@ class BugController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function update(Request $request, $id) {
-		//
-    return 'update';
+		$bug = Bug::findOrFail($id);
+		$bug->fill($request->all());
+		if ($bug->save()) {
+			return redirect()->action('BugController@show',['id' => $bug->id]);
+		}else{
+			abort(403,'Could not save bug.');
+		}
 	}
 
 }
