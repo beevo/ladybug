@@ -19,7 +19,10 @@ class BugController extends Controller {
 	 */
 	public function index() {
 		//
-    return Bug::all();
+    $bugs = Bug::all();
+		return view('bugs/index',[
+			'bugs' => $bugs
+		]);
 	}
 
 	/**
@@ -44,7 +47,8 @@ class BugController extends Controller {
 	public function create() {
 		//
     return view('bugs/create',[
-			'users' => User::all()
+			'users' => User::all(),
+			'bug' => new Bug()
 		]);
 	}
 
@@ -78,8 +82,11 @@ class BugController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function edit($id) {
-		//
-    return 'edit' . $id;
+		$bug = Bug::findOrFail($id);
+		return view('bugs/edit',[
+			'bug' => $bug,
+			'users' => User::all()
+		]);
 	}
 
 	/**
