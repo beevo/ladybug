@@ -1,39 +1,53 @@
-<form method="POST" action="{{ $bug->id ? '/bugs/'.$bug->id : '/bugs'}}">
+<form id="bug-form" method="POST" action="{{ $bug->id ? '/bugs/'.$bug->id : '/bugs'}}">
   @method($method)
   @csrf
-  <div class="card col s12 l8 row">
-    <div class="card-content">
-      <div class="card-title">
-        @if ($method == "POST")
-          Add New Bug
-        @endif
-      </div>
-      <div class="row">
-        <div class="input-field col s12">
-          <input name="title" id="bug-title" data-length="1000" type="text"
-          required class="validate" value="{{ $bug->title }}">
-          <label for="bug-title">Title</label>
-          <span class="helper-text" data-error="Title is required."
-          data-success=""></span>
+  <div class="col s12 l8">
+    <div class="card">
+      <div class="card-content">
+        <div class="card-title">
+          @if ($method == "POST")
+            Add New Bug
+          @else
+            Edit Bug <i>#{{ $bug->id }}</i>
+          @endif
         </div>
-      </div>
-      <div class="row">
-        <div class="input-field col s12">
-          <textarea name="description" cols="20" data-length="5000"
-          id="bug-description" class="materialize-textarea">{{ $bug->description }}</textarea>
-          <label for="bug-description">Description</label>
+        <div class="row">
+          <div class="input-field col s12">
+            <input name="title" id="bug-title" data-length="1000" type="text"
+            required class="validate" value="{{ $bug->title }}">
+            <label for="bug-title">Title</label>
+            <span class="helper-text" data-error="Title is required."
+            data-success=""></span>
+          </div>
         </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <textarea name="description" cols="20" data-length="5000"
+            id="bug-description" class="materialize-textarea">{{ $bug->description }}</textarea>
+            <label for="bug-description">Description</label>
+          </div>
+        </div>
+
       </div>
 
     </div>
-
   </div>
 
   {{-- Make these collapsibl? --}}
 
   <div class="col s12 l4">
-    <div class="chips"  id="bug-chips">
-      <input class="custom-class">
+    <div class="card">
+      <div class="card-content">
+        <div class="card-title">
+          Tags
+        </div>
+        <div class="chips" id="bug-chips">
+          @foreach ($bug->tags as $key => $tag)
+            <data value="{{ $tag->name }}"></data>
+          @endforeach
+          <input class="custom-class">
+        </div>
+      </div>
     </div>
   </div>
 

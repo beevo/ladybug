@@ -9,7 +9,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Tag extends Model{
   use Userstamps;
   use SoftDeletes;
-  
+  protected $fillable = [
+    'name', 'color'
+  ];
   public function bugs(){
     $this->belongsToMany('App\Models\Bug','bug_tag','tag_id','bug_id');
   }

@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Bug;
 use App\Models\User;
+use App\Models\Tag;
+use Illuminate\Support\Facades\Auth;
 class BugController extends Controller {
 	public function __construct(){
 		$this->middleware('auth',['only' =>
-		'store',
-		'update'
-	]);
+			'store',
+			'update'
+		]);
 	}
 	/**
 	 * Display a listing of the resource.
@@ -18,7 +20,6 @@ class BugController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function index() {
-		//
     $bugs = Bug::all();
 		return view('bugs/index',[
 			'bugs' => $bugs
@@ -67,12 +68,36 @@ class BugController extends Controller {
 		$bug = new Bug();
 		$bug->fill($request->all());
 		if ($bug->save()) {
+			$this->_saveTags($request->tags, $bug);
 			return redirect()->action('BugController@show',['id' => $bug->id]);
 		}else{
 			abort(403,'Could not save new bug.');
 		}
 	}
 
+	private function _saveTags($tagNames, &$bug){
+		if (empty($tagNames)) {
+			# code...
+			$bug->tags()->detach();
+			return;
+		}
+		$newTags = [];
+		$tagIds = [];
+		// get all tags from db
+		// if doesnt exist, create it
+		// save the ids for bug sync
+		foreach ($tagNames as $key => $tagName) {
+			$tag = Tag::where('name','LIKE',$tagName)->first();
+			if (!$tag) {
+				$tag = new Tag();
+				$tag->name = $tagName;
+				$tag->saveOrFail();
+
+			}
+			$tagIds[] = $tag->id;
+		}
+		return $bug->tags()->sync($tagIds);
+	}
 
 
 	/**
@@ -100,6 +125,7 @@ class BugController extends Controller {
 		$bug = Bug::findOrFail($id);
 		$bug->fill($request->all());
 		if ($bug->save()) {
+			$this->_saveTags($request->tags, $bug);
 			return redirect()->action('BugController@show',['id' => $bug->id]);
 		}else{
 			abort(403,'Could not save bug.');
