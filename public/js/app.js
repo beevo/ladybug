@@ -31,8 +31,6 @@ $(document).ready(function(){
     if (target.hasClass('close')) {
       var chip = M.Chips.getInstance(document.querySelector("#bug-chips"));
       chip.deleteChip(target.index());
-      console.log(target.index());
-      console.log("KILL");
     }
     e.stopPropagation();
   })
@@ -51,9 +49,7 @@ $(document).ready(function(){
   $('#bug-form').on('submit',function(e){
     var _form = $(this);
     var instance = M.Chips.getInstance(document.querySelector("#bug-chips"));
-    console.log(instance);
     instance.chipsData.forEach(function(chip){
-      console.log(chip.tag);
       $('<input>').attr({
           type: 'hidden',
           value: chip.tag,
@@ -70,7 +66,6 @@ $(document).ready(function(){
       dataType: 'JSON',
       data: $(this).serialize()
     }).done(function(data) {
-      console.log(data);
       if (data.content) {
         var commentClone = $('#comment-template').clone();
         commentClone.removeAttr('id');
@@ -91,7 +86,6 @@ $(document).ready(function(){
     $('select').formSelect();
   });
   $('.alert .close').on('click',function(event){
-    console.log("CliCK?");
     $(this).parent().remove();
     event.stopPropagation();
   });
