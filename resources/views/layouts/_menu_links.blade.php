@@ -4,7 +4,7 @@
 @else
 <li>
   <a href="!#">
-    {{ Auth::user()->name }}
+    <img src="http://flathash.com/{{ Auth::user()->id }}" class="user-icon" alt="">{{ Auth::user()->name }}
   </a>
 </li>
 <li>

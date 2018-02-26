@@ -8,7 +8,10 @@
           @if ($method == "POST")
             Add New Bug
           @else
-            Edit Bug <i>#{{ $bug->id }}</i>
+            Edit
+            <a href="/bugs/{{ $bug->id }}">
+              Bug <i>#{{ $bug->id }}</i>
+            </a>
           @endif
         </div>
         <div class="row">
@@ -78,9 +81,16 @@
   </div>
   <div class="row">
     <div class="col s12">
-      <button type="submit" class="btn btn-primary">
-        Submit
-      </button>
+      @if ($method == "POST")
+        <button type="submit" class="btn btn-primary">
+          Submit
+        </button>
+      @else
+        <button type="submit" class="btn">
+          Save
+        </button>
+      @endif
+
     </div>
 
   </div>
