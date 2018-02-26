@@ -72,6 +72,8 @@ $(document).ready(function(){
         commentClone.attr('data-commentid',data.id);
         commentClone.find('.comment-content').text(data.content);
         commentClone.appendTo($('#comments-container'));
+        $('#post-comment textarea').val('');
+        $('#comment-count').text(parseInt($('#comment-count').text())+1);
       }
       // console.log("success");
     }).fail(function() {

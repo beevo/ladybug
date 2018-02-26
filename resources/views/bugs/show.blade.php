@@ -25,8 +25,6 @@
         <i>#{{ $bug->id }}</i>
       </div>
       {{ $bug->creator->email }} opened this bug {{ $bug->created_at }}
-      <br>
-      0 comments
     </div>
     <div class="card-content">
       @if ($bug->description)
