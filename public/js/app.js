@@ -61,6 +61,31 @@ $(document).ready(function(){
       }).appendTo('#bug-form');
     });
   });
+
+  $('#post-comment').on('submit',function(e){
+    e.preventDefault();
+    $.ajax({
+      url: '/comments',
+      type: 'POST',
+      dataType: 'JSON',
+      data: $(this).serialize()
+    }).done(function(data) {
+      console.log(data);
+      if (data.content) {
+        var commentClone = $('#comment-template').clone();
+        commentClone.removeAttr('id');
+        commentClone.attr('data-commentid',data.id);
+        commentClone.find('.comment-content').text(data.content);
+        commentClone.appendTo($('#comments-container'));
+      }
+      // console.log("success");
+    }).fail(function() {
+      console.log("error");
+    }).always(function() {
+      console.log("complete");
+    });
+
+  });
   $('#bug-description').characterCounter();
   $(document).ready(function(){
     $('select').formSelect();

@@ -19,3 +19,9 @@
   border-radius: 4px;
   margin-right: 5px;
 }
+.chip-icon{
+  background: #ee6e73;
+}
+#comment-template{
+  display: none;
+}

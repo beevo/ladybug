@@ -31,18 +31,18 @@ class User extends Authenticatable{
   }
 
   public function comments(){
-    $this->hasMany('App\Models\Comment','created_by');
+    return $this->hasMany('App\Models\Comment','created_by');
   }
 
   public function bugs(){
-    $this->hasMany('App\Models\Bug','created_by');
+    return $this->hasMany('App\Models\Bug','created_by');
   }
 
   public function assignedBugs(){
-    $this->belongsToMany('App\Models\Bug','bug_user','user_id','bug_id');
+    return $this->belongsToMany('App\Models\Bug','bug_user','user_id','bug_id');
   }
 
   public function tags(){
-    $this->hasMany('App\Models\Tag','created_by');
+    return $this->hasMany('App\Models\Tag','created_by');
   }
 }
