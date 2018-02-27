@@ -4,8 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Bug;
+use App\Models\User;
 class BugController extends Controller {
-
+	public function __construct(){
+		$this->middleware('auth',['only' =>
+		'store',
+		'update'
+	]);
+	}
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -13,7 +19,10 @@ class BugController extends Controller {
 	 */
 	public function index() {
 		//
-    return 'index';
+    $bugs = Bug::all();
+		return view('bugs/index',[
+			'bugs' => $bugs
+		]);
 	}
 
 	/**
@@ -25,7 +34,9 @@ class BugController extends Controller {
 	public function show($id) {
 		//
 		$bug = Bug::findOrFail($id);
-    return $bug->creator;
+		return view('bugs/show',[
+			'bug' => $bug
+		]);
 	}
 
 	/**
@@ -35,7 +46,10 @@ class BugController extends Controller {
 	 */
 	public function create() {
 		//
-    return 'create';
+    return view('bugs/create',[
+			'users' => User::all(),
+			'bug' => new Bug()
+		]);
 	}
 
 	/**
@@ -45,8 +59,18 @@ class BugController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function store(Request $request) {
-		//
-    return 'store';
+		// return $request->all();
+		$request->validate([
+	    'title' => 'required|max:1000',
+	    'description' => 'max:5000'
+		]);
+		$bug = new Bug();
+		$bug->fill($request->all());
+		if ($bug->save()) {
+			return redirect()->action('BugController@show',['id' => $bug->id]);
+		}else{
+			abort(403,'Could not save new bug.');
+		}
 	}
 
 
@@ -58,8 +82,11 @@ class BugController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function edit($id) {
-		//
-    return 'edit' . $id;
+		$bug = Bug::findOrFail($id);
+		return view('bugs/edit',[
+			'bug' => $bug,
+			'users' => User::all()
+		]);
 	}
 
 	/**
@@ -70,8 +97,13 @@ class BugController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function update(Request $request, $id) {
-		//
-    return 'update';
+		$bug = Bug::findOrFail($id);
+		$bug->fill($request->all());
+		if ($bug->save()) {
+			return redirect()->action('BugController@show',['id' => $bug->id]);
+		}else{
+			abort(403,'Could not save bug.');
+		}
 	}
 
 }

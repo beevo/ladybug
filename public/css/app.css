@@ -1,0 +1,13 @@
+.alert .close{
+  float: right;
+  top: -6px;
+}
+.bug-actions{
+  float: right;
+}
+.bug-comments .card-image img{
+  height: 100%;
+}
+.float-right{
+  float: right !important;
+}
