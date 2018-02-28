@@ -94,4 +94,5 @@ $(document).ready(function(){
   $('.focus-textarea').on('click',function(){
     $(this).find('textarea').focus();
   });
+  $('.carousel').carousel();
 });
