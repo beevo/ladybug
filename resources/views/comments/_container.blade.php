@@ -19,7 +19,6 @@
           </div>
         @endauth
         @foreach ($bug->comments as $key => $comment)
-          {{-- TODO LOOK --}}
           <div class="card horizontal comment" data-commentid="{{$comment->id}}">
             <div class="card-content col s12">
               <div class="chip">

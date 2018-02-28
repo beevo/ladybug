@@ -1,18 +1,19 @@
 @extends('layouts.app')
 
 @section('content')
+  <div class="carousel">
 
-  <div class="content">
-      <div class="title m-b-md">
-          Ladybug Welcome
-      </div>
+     <a class="carousel-item" href="#one!"><img src="https://lorempixel.com/250/250/nature/1"></a>
 
-      <div class="links">
-          <a href="https://laravel.com/docs">Documentation</a>
-          <a href="https://laracasts.com">Laracasts</a>
-          <a href="https://laravel-news.com">News</a>
-          <a href="https://forge.laravel.com">Forge</a>
-          <a href="https://github.com/laravel/laravel">GitHub</a>
-      </div>
-  </div>
+     <a class="carousel-item" href="#two!"><img src="https://lorempixel.com/250/250/nature/2"></a>
+
+     <a class="carousel-item" href="#three!"><img src="https://lorempixel.com/250/250/nature/3"></a>
+
+     <a class="carousel-item" href="#four!"><img src="https://lorempixel.com/250/250/nature/4"></a>
+
+     <a class="carousel-item" href="#five!"><img src="https://lorempixel.com/250/250/nature/5"></a>
+
+   </div>
+
+
 @endsection
