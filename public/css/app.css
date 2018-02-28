@@ -19,3 +19,7 @@
   border-radius: 4px;
   margin-right: 5px;
 }
+.col-center{
+  float:none !important;
+  margin-right:auto
+}

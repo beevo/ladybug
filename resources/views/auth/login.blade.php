@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-<form class="col s12" method="POST" action="{{ route('login') }}">
-  <div class="card col s12">
+<form method="POST" action="{{ route('login') }}">
+  <div class="card col s12 m6 l6 col-center">
     <div class="card-content">
       <span class="card-title">Login</span>
         @csrf

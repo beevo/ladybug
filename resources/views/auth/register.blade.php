@@ -4,24 +4,25 @@
 
 <form method="POST" action="{{ route('register') }}">
   @csrf
-  <div class="card col s12">
+  <div class="card col s12 m6 l6 col-center">
     <div class="card-content">
       <span class="card-title">
         Register
       </span>
       <div class="row">
-        <div class="col l6 s12 input-field">
+        <div class="col s12 input-field">
+          {{-- LOOK at validation on error and "old" values --}}
           <input id="name" type="text"
             class="validate {{ $errors->has('name') ? ' is-invalid' : '' }}"
             name="name" value="{{ old('name') }}" required autofocus>
           <label for="name">Name</label>
           @if ($errors->has('name'))
-              <span class="invalid-feedback">
-                  <strong>{{ $errors->first('name') }}</strong>
-              </span>
+            <span class="invalid-feedback">
+              <strong>{{ $errors->first('name') }}</strong>
+            </span>
           @endif
         </div>
-        <div class="col l6 s12 input-field">
+        <div class="col s12 input-field">
           <input id="email" type="email"
             class="validate {{ $errors->has('email') ? ' is-invalid' : '' }}"
             name="email" value="{{ old('email') }}" required>
@@ -39,11 +40,11 @@
           <input id="password" type="password"
             class="validate {{ $errors->has('password') ? ' is-invalid' : '' }}"
             name="password" required>
-          <label for="password"></label>
+          <label for="password">Password</label>
           @if ($errors->has('password'))
-              <span class="invalid-feedback">
-                  <strong>{{ $errors->first('password') }}</strong>
-              </span>
+            <span class="invalid-feedback">
+              <strong>{{ $errors->first('password') }}</strong>
+            </span>
           @endif
         </div>
         <div class="col l6 s12 input-field">
