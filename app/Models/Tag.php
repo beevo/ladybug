@@ -13,9 +13,7 @@ class Tag extends Model{
     'name', 'color'
   ];
   public function bugs(){
-    $this->belongsToMany('App\Models\Bug','bug_tag','tag_id','bug_id');
+    return $this->belongsToMany('App\Models\Bug','bug_tag','tag_id','bug_id');
   }
-  public function user(){
-    $this->belongsTo('App\Models\User','created_by');
-  }
+  //Creator
 }
