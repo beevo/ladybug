@@ -4,7 +4,7 @@
 <div class="row">
   <h3>
     Bugs
-    <a href="/bugs/create" class="float-right waves-effect waves-light btn">
+    <a href="/bugs/create" class="right waves-effect waves-light btn">
       <span class="hide-on-small-only">
         New Bug
       </span>
