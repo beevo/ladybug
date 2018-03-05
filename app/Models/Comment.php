@@ -8,11 +8,13 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Comment extends Model{
   use Userstamps;
   use SoftDeletes;
+  protected $fillable = [
+    'content'
+  ];
   // ->created_by from userstamps
   public function bug(){
-    $this->belongsTo('App\Models\Bug');
+    // return 1;
+    return $this->belongsTo('App\Models\Bug');
   }
-  public function user(){
-    $this->belongsTo('App\Models\User','created_by');
-  }
+
 }

@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Bug extends Model{
   use Userstamps;
   use SoftDeletes;
-  
+
   protected $fillable = [
     'title', 'description'
   ];
@@ -21,7 +21,9 @@ class Bug extends Model{
   public function tags(){
     return $this->belongsToMany('App\Models\Tag','bug_tag','bug_id','tag_id');
   }
-
+  public function comments(){
+    return $this->hasMany('App\Models\Comment');
+  }
   // public function user(){
   //   return $this->belongsTo('App\Models\User','created_by');
   // }
