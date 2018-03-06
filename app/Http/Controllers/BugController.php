@@ -20,7 +20,7 @@ class BugController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function index() {
-    $bugs = Bug::all();
+		$bugs = Bug::all();
 		return view('bugs/index',[
 			'bugs' => $bugs
 		]);
